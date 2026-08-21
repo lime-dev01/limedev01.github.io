@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limedev | Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0f0f0f;
+      color: #ffffff;
+      font-family: system-ui, sans-serif;
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { font-size: 2rem; margin-bottom: 10px; }
+    p { color: #888; }
+    
+    .galerie {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .photo-card {
+      background: #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .photo-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-card p {
+      padding: 15px;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Limedev Portfolio</h1>
+    <p>Photographie & Développement Web</p>
+  </header>
+
+  <main class="galerie">
+    <div class="photo-card">
+      <img src="photo1.jpg" alt="Photo 1">
+      <p>Projet Photo 1</p>
+    </div>
+    <div class="photo-card">
+      <img src="photo2.jpg" alt="Photo 2">
+      <p>Projet Photo 2</p>
+    </div>
+    <div class="photo-card">
+      <img src="photo3.jpg" alt="Photo 3">
+      <p>Projet Photo 3</p>
+    </div>
+  </main>
+
+</body>
+</html>
