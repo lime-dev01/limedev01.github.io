@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie | Yola Art Paris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Styles spécifiques pour la grille de la galerie */
+    .filter-bar { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.2);
+      color: #aaa; padding: 8px 18px; border-radius: 20px; font-size: 0.75rem;
+      letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s;
+    }
+    .filter-btn:hover, .filter-btn.active { background: #d4af37; color: #000; border-color: #d4af37; }
+    
+    .galerie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+    .photo-card {
+      background: rgba(20, 22, 25, 0.6); border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 6px; overflow: hidden; transition: transform 0.3s, border-color 0.3s;
+    }
+    .photo-card:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.4); }
+    .photo-wrapper { height: 350px; overflow: hidden; position: relative; cursor: pointer; }
+    .photo-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .photo-card:hover .photo-wrapper img { transform: scale(1.05); }
+    .photo-info { padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .photo-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: #fff; }
+    .photo-info p { font-size: 0.7rem; color: #888; text-transform: uppercase; }
+    
+    /* Lightbox */
+    .lightbox {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.92); z-index: 2000; justify-content: center; align-items: center;
+    }
+    .lightbox-img { max-width: 90%; max-height: 85vh; object-fit: contain; }
+    .close-lightbox { position: absolute; top: 20px; right: 30px; color: #d4af37; font-size: 35px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Yola Art Paris</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="galerie.html" class="active">Galerie</a></li>
+      <li><a href="biographie.html">Biographie</a></li>
+      <li><a href="contact.html">Tirages & Contact</a></li>
+    </ul>
+  </nav>
+
+  <main style="max-width: 1300px; margin: 40px auto; padding: 0 20px;">
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; text-align: center; color: #d4af37; font-weight: 300; margin-bottom: 30px;">
+      Les Collections
+    </h1>
+
+    <!-- FILTRES -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">Toutes</button>
+      <button class="filter-btn" data-filter="nb">Noir & Blanc</button>
+      <button class="filter-btn" data-filter="paris">Paris</button>
+      <button class="filter-btn" data-filter="nature">Nature & Macro</button>
+      <button class="filter-btn" data-filter="faune">Faune</button>
+    </div>
+
+    <!-- GRILLE PHOTOS -->
+    <div class="galerie-grid">
+      <div class="photo-card" data-category="nb paris">
+        <div class="photo-wrapper"><img src="photo1.jpg" alt="Silences de Seine"></div>
+        <div class="photo-info"><div><h3>Silences de Seine</h3><p>N&B • Paris</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nature">
+        <div class="photo-wrapper"><img src="photo2.jpg" alt="Éclosion Sauvage"></div>
+        <div class="photo-info"><div><h3>Éclosion Sauvage</h3><p>Couleur • Nature</p></div></div>
+      </div>
+      <div class="photo-card" data-category="faune nature">
+        <div class="photo-wrapper"><img src="photo3.jpg" alt="Rosée du Matin"></div>
+        <div class="photo-info"><div><h3>Rosée du Matin</h3><p>Couleur • Faune</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nb paris">
+        <div class="photo-wrapper"><img src="photo4.jpg" alt="Reflets Haussmanniens"></div>
+        <div class="photo-info"><div><h3>Reflets Haussmanniens</h3><p>N&B • Paris</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nature">
+        <div class="photo-wrapper"><img src="photo5.jpg" alt="Pétales Suspendus"></div>
+        <div class="photo-info"><div><h3>Pétales Suspendus</h3><p>Couleur • Nature</p></div></div>
+      </div>
+      <div class="photo-card" data-category="faune">
+        <div class="photo-wrapper"><img src="photo6.jpg" alt="L'Infiniment Petit"></div>
+        <div class="photo-info"><div><h3>L'Infiniment Petit</h3><p>Couleur • Faune</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nb paris">
+        <div class="photo-wrapper"><img src="photo7.jpg" alt="Ombres du Trocadéro"></div>
+        <div class="photo-info"><div><h3>Ombres du Trocadéro</h3><p>N&B • Paris</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nature">
+        <div class="photo-wrapper"><img src="photo8.jpg" alt="Symphonie Flore"></div>
+        <div class="photo-info"><div><h3>Symphonie Flore</h3><p>Couleur • Nature</p></div></div>
+      </div>
+      <div class="photo-card" data-category="faune">
+        <div class="photo-wrapper"><img src="photo9.jpg" alt="Ailes d'Émeraude"></div>
+        <div class="photo-info"><div><h3>Ailes d'Émeraude</h3><p>Couleur • Faune</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nb">
+        <div class="photo-wrapper"><img src="photo10.jpg" alt="Brumes Urbaines"></div>
+        <div class="photo-info"><div><h3>Brumes Urbaines</h3><p>Noir & Blanc</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nature">
+        <div class="photo-wrapper"><img src="photo11.jpg" alt="Lumière Botanique"></div>
+        <div class="photo-info"><div><h3>Lumière Botanique</h3><p>Couleur • Nature</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nature faune">
+        <div class="photo-wrapper"><img src="photo12.jpg" alt="Micro Cosmos"></div>
+        <div class="photo-info"><div><h3>Micro Cosmos</h3><p>Couleur • Macro</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nb paris">
+        <div class="photo-wrapper"><img src="photo13.jpg" alt="Pavés Mouillés"></div>
+        <div class="photo-info"><div><h3>Pavés Mouillés</h3><p>N&B • Paris</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nature">
+        <div class="photo-wrapper"><img src="photo14.jpg" alt="Cœur de Nymphéa"></div>
+        <div class="photo-info"><div><h3>Cœur de Nymphéa</h3><p>Couleur • Nature</p></div></div>
+      </div>
+      <div class="photo-card" data-category="nb faune">
+        <div class="photo-wrapper"><img src="photo15.jpg" alt="Instants Fugitifs"></div>
+        <div class="photo-info"><div><h3>Instants Fugitifs</h3><p>N&B • Faune</p></div></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="Zoom">
+  </div>
+
+  <footer>
+    <p>© Yola Art Paris. Tous droits réservés.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
