@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tirages & Contact | Yola Art Paris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+    .contact-card {
+      background: rgba(20, 22, 25, 0.6);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 8px;
+      padding: 40px 30px;
+    }
+    .contact-card h1, .contact-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      color: #d4af37;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+    .contact-card h1 { font-size: 2.5rem; }
+    .contact-card h2 { font-size: 1.8rem; }
+    .contact-card p {
+      color: #ccc;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 25px;
+    }
+    .info-list li {
+      color: #bbb;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      color: #aaa;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 4px;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: #d4af37;
+    }
+    .form-group textarea {
+      resize: vertical;
+      height: 120px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html" class="logo">Yola Art Paris</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="galerie.html">Galerie</a></li>
+      <li><a href="biographie.html">Biographie</a></li>
+      <li><a href="contact.html" class="active">Tirages & Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="contact-container">
+    
+    <!-- INFORMATIONS SUR LES TIRAGES -->
+    <div class="contact-card">
+      <h1>Tirages d'Art</h1>
+      <p>
+        Chaque photographie est disponible en <strong>Édition Limitée</strong>, numérotée et signée à la main par l'artiste.
+      </p>
+
+      <ul class="info-list">
+        <li>✨ <strong>Qualité Musée :</strong> Impression Fine Art Pigmentaire.</li>
+        <li>📜 <strong>Certificat :</strong> Livré avec son certificat d'authenticité.</li>
+        <li>🖼️ <strong>Formats :</strong> Sur mesure (du 30x45 cm au grand format).</li>
+        <li>📦 <strong>Expédition :</strong> Envoi sécurisé en France et à l'International.</li>
+      </ul>
+
+      <p style="font-size: 0.85rem; color: #888;">
+        Pour toute demande de tarif, projet de sur-mesure ou acquisition pour une galerie, vous pouvez utiliser le formulaire ci-contre.
+      </p>
+    </div>
+
+    <!-- FORMULAIRE DE CONTACT -->
+    <div class="contact-card">
+      <h2>Acquérez une Œuvre</h2>
+      
+      <form action="https://formspree.io/f/xbjnqpyz" method="POST">
+        <div class="form-group">
+          <label for="nom">Nom & Prénom</label>
+          <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Adresse Email</label>
+          <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="oeuvre">Œuvre recherchée / Sujet</label>
+          <input type="text" id="oeuvre" name="oeuvre" placeholder="Ex: Silences de Seine ou Demande d'information">
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Précisez votre demande (format, encadrement...)" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-gold" style="width: 100%; cursor: pointer;">Envoyer la demande</button>
+      </form>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© Yola Art Paris. Tous droits réservés.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
