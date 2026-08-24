@@ -1,4 +1,3 @@
-/* DESIGN GLOBAL - YOLA ART PARIS */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
@@ -37,7 +36,7 @@ nav {
 }
 .nav-links a:hover, .nav-links a.active { color: #d4af37; }
 
-/* BOUTONS ET CARTES */
+/* BOUTONS */
 .btn-gold {
   display: inline-block; padding: 12px 30px;
   border: 1px solid #d4af37; color: #d4af37;
@@ -47,9 +46,30 @@ nav {
 }
 .btn-gold:hover { background: #d4af37; color: #000; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
 
+/* ANIMATIONS AU SCROLL */
+.hidden-element {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.show-element { opacity: 1; transform: translateY(0); }
+
+/* LIGHTBOX & FLÈCHES DE NAVIGATION */
+.lightbox {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center;
+}
+.lightbox-img { max-width: 85%; max-height: 80vh; object-fit: contain; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+.close-lightbox { position: absolute; top: 20px; right: 30px; color: #d4af37; font-size: 40px; cursor: pointer; }
+.nav-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  color: #d4af37; font-size: 40px; cursor: pointer; padding: 20px;
+  user-select: none; transition: transform 0.2s;
+}
+.nav-arrow:hover { transform: translateY(-50%) scale(1.2); }
+.prev-lightbox { left: 20px; }
+.next-lightbox { right: 20px; }
+
 footer {
   text-align: center; padding: 40px 20px; margin-top: 80px;
   border-top: 1px solid rgba(255, 255, 255, 0.05); color: #666; font-size: 0.8rem;
 }
-footer a { color: #aaa; text-decoration: none; }
-footer a:hover { color: #d4af37; }
