@@ -1,5 +1,3 @@
-// INTERACTIVITÉ - YOLA ART PARIS
-
 document.addEventListener('DOMContentLoaded', () => {
 
   // 1. FILTRES DE LA GALERIE
@@ -10,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', () => {
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
-
       const filter = button.getAttribute('data-filter');
 
       photoCards.forEach(card => {
@@ -24,45 +21,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2. LIGHTBOX (ZOOM SUR IMAGE)
+  // 2. DIAPORAMA & LIGHTBOX (FLÈCHES GAUCHE / DROITE)
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const closeBtn = document.querySelector('.close-lightbox');
+  const prevBtn = document.querySelector('.prev-lightbox');
+  const nextBtn = document.querySelector('.next-lightbox');
 
-  if (lightbox && lightboxImg) {
-    document.querySelectorAll('.photo-wrapper img').forEach(img => {
-      img.addEventListener('click', () => {
+  let imagesList = [];
+  let currentIndex = 0;
+
+  function updateImagesList() {
+    imagesList = Array.from(document.querySelectorAll('.photo-wrapper img')).filter(img => {
+      return img.closest('.photo-card').style.display !== 'none';
+    });
+  }
+
+  document.querySelectorAll('.photo-wrapper img').forEach(img => {
+    img.addEventListener('click', () => {
+      updateImagesList();
+      currentIndex = imagesList.indexOf(img);
+      if (currentIndex !== -1 && lightbox && lightboxImg) {
+        lightboxImg.src = imagesList[currentIndex].src;
         lightbox.style.display = 'flex';
-        lightboxImg.src = img.src;
-      });
+      }
     });
+  });
 
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        lightbox.style.display = 'none';
-      });
+  function showImage(index) {
+    if (imagesList.length === 0) return;
+    if (index < 0) index = imagesList.length - 1;
+    if (index >= imagesList.length) index = 0;
+    currentIndex = index;
+    lightboxImg.src = imagesList[currentIndex].src;
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showImage(currentIndex - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showImage(currentIndex + 1); });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox && lightbox.style.display === 'flex') {
+      if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+      if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+      if (e.key === 'Escape') lightbox.style.display = 'none';
     }
+  });
 
-    lightbox.addEventListener('click', (e) => {
-      if (e.target !== lightboxImg) {
-        lightbox.style.display = 'none';
+  if (closeBtn) closeBtn.addEventListener('click', () => lightbox.style.display = 'none');
+  if (lightbox) lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) lightbox.style.display = 'none';
+  });
+
+  // 3. ANIMATION D'APPARITION AU DÉFILEMENT (SCROLL)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show-element');
       }
     });
-  }
+  }, { threshold: 0.1 });
 
-  // 3. BOUTON RETOUR EN HAUT
-  const backToTop = document.getElementById('backToTop');
-  if (backToTop) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTop.style.display = 'flex';
-      } else {
-        backToTop.style.display = 'none';
-      }
-    });
-
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
+  document.querySelectorAll('.photo-card, .bio-card, .contact-card').forEach(el => {
+    el.classList.add('hidden-element');
+    observer.observe(el);
+  });
 });
