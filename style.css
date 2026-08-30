@@ -111,3 +111,24 @@ footer {
   .lightbox-img { max-width: 95%; max-height: 70vh; }
   .nav-arrow { font-size: 24px; padding: 5px; }
 }
+
+/* Empêcher de glisser/déposer les images sur le bureau */
+img {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Empêcher l'impression des photos */
+@media print {
+    img, .gallery-grid, .gallery-item {
+        display: none !important;
+    }
+    body::before {
+        content: "L'impression des œuvres de Yola Art Paris est strictement interdite.";
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-align: center;
+        display: block;
+        margin-top: 50px;
+    }
+}
