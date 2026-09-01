@@ -87,9 +87,3 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Bloquer le clic droit sur les images
-document.addEventListener('contextmenu', (e) => {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-    }
-});
