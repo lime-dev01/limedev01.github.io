@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
       photoCards.forEach(card => {
         const category = card.getAttribute('data-category') || '';
         if (filter === 'all' || category.includes(filter)) {
-          card.style.display = 'block';
+          card.style.display = ''; // Laisse le CSS d'origine gérer l'affichage proprement
         } else {
           card.style.display = 'none';
         }
@@ -81,9 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.photo-card, .bio-card, .contact-card').forEach(el => {
+  // On applique l'animation uniquement sur les blocs hors photos pour ne pas perturber la galerie
+  document.querySelectorAll('.bio-card, .contact-card').forEach(el => {
     el.classList.add('hidden-element');
     observer.observe(el);
   });
 });
-
