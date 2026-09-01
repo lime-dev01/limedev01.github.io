@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // 1. FILTRES DE LA GALERIE
+  // 1. FILTRES DE LA GALERIE (Corrigé pour la grille CSS)
   const filterButtons = document.querySelectorAll('.filter-btn');
   const photoCards = document.querySelectorAll('.photo-card');
 
@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
       photoCards.forEach(card => {
         const category = card.getAttribute('data-category') || '';
         if (filter === 'all' || category.includes(filter)) {
-          card.style.display = ''; // Laisse le CSS d'origine gérer l'affichage proprement
+          card.style.display = 'block'; // Force l'affichage en bloc dans la grille
         } else {
-          card.style.display = 'none';
+          card.style.display = 'none';  // Cache proprement
         }
       });
     });
@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateImagesList() {
     imagesList = Array.from(document.querySelectorAll('.photo-wrapper img')).filter(img => {
-      return img.closest('.photo-card').style.display !== 'none';
+      const card = img.closest('.photo-card');
+      return card && window.getComputedStyle(card).display !== 'none';
     });
   }
 
@@ -81,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.1 });
 
-  // On applique l'animation uniquement sur les blocs hors photos pour ne pas perturber la galerie
   document.querySelectorAll('.bio-card, .contact-card').forEach(el => {
     el.classList.add('hidden-element');
     observer.observe(el);
